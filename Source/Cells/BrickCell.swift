@@ -96,7 +96,7 @@ open class BaseBrickCell: UICollectionViewCell {
     open lazy var topSeparatorLine: UIView = {
         return UIView()
     }()
-
+    
     open override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         super.apply(layoutAttributes)
 
@@ -218,6 +218,12 @@ open class BrickCell: BaseBrickCell {
         _brick.brickCellTapDelegate?.didTapBrickCell(self)
     }
 
+    open override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
+        UIView.animate(withDuration: UIView.inheritedAnimationDuration, animations: {
+            self.layoutIfNeeded()
+        })
+    }
+    
     open override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
         guard self._brick.height.isEstimate(withValue: nil) else {
             return layoutAttributes
